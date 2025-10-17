@@ -1,0 +1,30 @@
+services:
+  postgre:
+    restart: always
+    image: postgres:16-alpine
+    container_name: mnemosyneread-database
+    environment:
+      POSTGRES_DB: mnemosyneread
+      POSTGRES_USER: jacques
+      POSTGRES_PASSWORD: mnemosyneread
+    ports:
+      - 5432:5432
+    volumes:
+      - mnemosyneread-database-data:/var/lib/postgresql/data
+  fileshare:
+    restart: always
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    container_name: fileshare
+    environment:
+      DATABASE_URL: postgres://jacques:mnemosyneread@postgre/mnemosyneread
+      TOKEN: token
+    ports:
+      - 8080:8080
+    volumes:
+      - files:/apps/files/
+
+volumes:
+  mnemosyneread-database-data:
+  files:
