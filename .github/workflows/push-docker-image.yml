@@ -31,4 +31,4 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fileshare:latest
           context: ./
-          file: ./Dockerfile
+          file: ./docker/Dockerfile
