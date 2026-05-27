@@ -1,4 +1,4 @@
-const submit_buton: HTMLButtonElement = document.getElementById('submit');
+const submit_buton = document.getElementById('submit') as HTMLButtonElement;
 
 submit_buton.addEventListener("click", async () => {
     const fileElem = document.getElementById("fileElem") as HTMLInputElement;
@@ -18,8 +18,8 @@ submit_buton.addEventListener("click", async () => {
             method: 'post',
             body: formData
         });
-        document.querySelector("body").innerHTML = "";
-        document.querySelector("body").textContent = "Done";
+        document.querySelector("body")!.innerHTML = "";
+        document.querySelector("body")!.textContent = "Done";
     } catch (err) {
         console.error(`Error: ${err}`);
     }

@@ -5,10 +5,10 @@ edition = "2024"
 
 [dependencies]
 actix-web = "4.11.0"
-askama = "0.14.0"
+askama = "0.16.0"
 chrono = "0.4.42"
 diesel = { version = "2.3.2", features = ["postgres", "uuid"] }
-diesel-async = { version = "0.7.3", features = [
+diesel-async = { version = "0.9.0", features = [
     "postgres",
     "bb8",
     "async-connection-wrapper",

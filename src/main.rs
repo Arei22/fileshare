@@ -1,3 +1,4 @@
+use actix_multipart::form::MultipartFormConfig;
 use actix_web::App;
 use actix_web::HttpServer;
 use actix_web::middleware;
@@ -21,6 +22,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .app_data(ThinData(pool.clone()))
+            .app_data(MultipartFormConfig::default().total_limit(10 * 1024 * 1024 * 1024))
             .configure(doup::routes::register_all)
             .wrap(middleware::NormalizePath::trim())
     })
