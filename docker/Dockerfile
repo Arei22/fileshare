@@ -23,7 +23,7 @@ RUN cargo build --release --target=x86_64-unknown-linux-musl
 COPY . .
 RUN cargo build --release --target=x86_64-unknown-linux-musl
 
-FROM alpine:3.20
+FROM alpine:latest
 
 RUN apk add --no-cache ca-certificates
 

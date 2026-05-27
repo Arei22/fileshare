@@ -1,26 +1,48 @@
-const submit_buton = document.getElementById('submit') as HTMLButtonElement;
+const submitButton = document.getElementById("submit");
 
-submit_buton.addEventListener("click", async () => {
-    const fileElem = document.getElementById("fileElem") as HTMLInputElement;
-    const file = fileElem.files?.[0];
-    var url = window.location;
-    let params = new URLSearchParams(url.search);
-    let uuid = params.get("uuid");
+if (!(submitButton instanceof HTMLButtonElement)) {
+    throw new Error("Submit button not found");
+}
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('uuid', uuid);
+submitButton.addEventListener("click", () => {
+    void (async () => {
+        const fileElem = document.getElementById("fileElem");
 
+        if (!(fileElem instanceof HTMLInputElement)) {
+            console.error("File input not found");
+            return;
+        }
 
+        const file = fileElem.files?.[0];
 
-    try {
-        await fetch('/get_upload', {
-            method: 'post',
-            body: formData
-        });
-        document.querySelector("body")!.innerHTML = "";
-        document.querySelector("body")!.textContent = "Done";
-    } catch (err) {
-        console.error(`Error: ${err}`);
-    }
+        if (!file) {
+            console.error("No file selected");
+            return;
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const uuid = params.get("uuid");
+
+        if (!uuid) {
+            console.error("UUID missing");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("uuid", uuid);
+
+        try {
+            await fetch("/get_upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            document.body.textContent = "Done";
+        } catch (err: unknown) {
+            console.error(
+                `Error: ${err instanceof Error ? err.message : String(err)}`
+            );
+        }
+    })();
 });

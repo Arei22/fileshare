@@ -5,7 +5,9 @@ fn main() -> std::io::Result<()> {
     #[cfg(debug_assertions)]
     println!("cargo:rerun-if-changed=../frontend");
 
-    let install_output = Command::new("pnpm").args(["i"]).output()?;
+    let install_output = Command::new("pnpm")
+        .args(["i", "--frozen-lockfile", "--ignore-script"])
+        .output()?;
     if !install_output.status.success() {
         panic!("pnpm install failed: {:?}", install_output);
     }
