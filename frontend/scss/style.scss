@@ -1,0 +1,32 @@
+body {
+    font-family: "Arial", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 1.5em;
+
+    #drop-zone {
+        display: flex;
+        width: 90vw;
+        height: 80vh;
+        max-height: 90vw;
+        max-width: 80vh;
+        border: 10px dashed #cccccc;
+        border-radius: 10%;
+        color: slategray;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+
+        #file-input {
+            display: none;
+        }
+    }
+
+    #btn-div {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
